@@ -1,0 +1,66 @@
+.header-dialog{
+    width: 100%;
+    background-color: #673ab7;
+    color: white;
+    height: 40px;
+}
+.header-dialog mat-icon{
+    float: right;
+    margin-top: 3px;
+    margin-right: 5px;
+    cursor: pointer;
+    padding: 5px;
+}
+.header-dialog h2{
+    float: left;
+    padding: 5px;
+}
+#com{
+    margin-left: 20px;
+    float: left;
+    width: 30%;
+}
+#my-datepicker{
+    margin-right: 20px;
+    float: right;
+}
+.mat-table{
+    margin: 20px;
+}
+.mat-dialog-content{
+    padding: 0px;
+    margin: 0px;
+}
+mat-dialog-actions{
+    height: 200px;
+    width: 50%;
+}
+.mat-form-field{
+    width: 80%;
+}
+.mat-cell, .mat-header-cell{
+    text-align: center;
+}
+.mat-dialog-content{
+    max-height: 100vh;
+    max-width: 100vw;
+}
+.cdk-overlay-pane{
+    max-width: 100vw !important;
+}
+.min-table{
+    height: calc(100vh - 375px);
+    overflow: scroll;
+    margin-top: 20px;
+}
+mat-dialog-actions{
+    height: 57px;
+    width: 100%;
+}
+mat-dialog-actions button{
+    margin: 10px;
+}
+mat-card h3{
+    text-align: center;
+    margin-top: 10px;
+}

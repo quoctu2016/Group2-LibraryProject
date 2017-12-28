@@ -1,0 +1,97 @@
+<div class="header-dialog" color="primary">
+  <h2 mat-dialog-title>Mượn sách</h2>
+  <mat-icon (click)="closeDialog()">close</mat-icon>
+</div>
+<mat-dialog-content>
+    <mat-grid-list cols="2" rowHeight="70px">
+        <mat-grid-tile
+        [colspan]=1
+        [rowspan]=3
+        >
+        <mat-card class="example-card maxheight formwidth">
+            <h3 class="h3-title" *ngIf="selectUser"><font color="red">Thông tin thành viên</font></h3>
+            <mat-card-header>
+              <mat-card-title *ngIf="!selectUser" ><h3><font color="red">Chưa chón thành viên</font></h3></mat-card-title>
+              <mat-card-title *ngIf="selectUser" ><h3>Tên thành viên: {{selectUser.MemberName}}</h3></mat-card-title>
+              <mat-card-subtitle *ngIf="selectUser">Mã thẻ: {{selectUser.MemberCode}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content *ngIf="selectUser">
+              <p>
+                Email:{{selectUser.Email}}
+              </p>
+              <p>
+                  SĐT:{{selectUser.Phone}}
+              </p>
+            </mat-card-content>
+          </mat-card>
+      </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field class="example-full-width">
+                <form action="">
+              <input [(ngModel)]="code" type="text" placeholder="Mã thành viên" aria-label="Number" matInput [formControl]="userControl" [matAutocomplete]="auto">
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayUserFn" (optionSelected)="userSelected()">
+                <mat-option *ngFor="let option of filteredUsers | async" [value]="option">
+                  {{ option.MemberCode }} - {{ option.MemberName }}
+                </mat-option>
+              </mat-autocomplete>
+            </form>
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field>
+              <input type="text" name="" id="" matInput placeholder="Họ tên" disabled value="{{selectUser? selectUser.MemberName:''}}">
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+                <mat-form-field class="example-full-width">
+                  <input type="text" placeholder="Mã sách" aria-label="Number" matInput [formControl]="bookControl" [matAutocomplete]="autoBook">
+                  <mat-autocomplete #autoBook="matAutocomplete" [displayWith]="displayBookFn" (optionSelected)="bookSelected()">
+                    <mat-option *ngFor="let option of filteredBooks | async" [value]="option">
+                      {{ option.BookCode }} - {{option.BookName}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+            </mat-grid-tile>
+            <!-- <mat-grid-tile
+            [colspan]=2
+            [rowspan]=4>
+            
+            </mat-grid-tile> -->
+    </mat-grid-list>
+    <div class="example-container mat-elevation-z8 fullwidth min-table">
+      <mat-table #table [dataSource]="dataSource">
+    
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+    
+        <!-- Position Column -->
+        <ng-container matColumnDef="code">
+          <mat-header-cell *matHeaderCellDef> Mã sách. </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.bookCode|number}} </mat-cell>
+        </ng-container>
+    
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.bookName|uppercase}} </mat-cell>
+        </ng-container>
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+          <mat-cell *matCellDef="let element"> 
+            <button (click)="deleteElement(element.bookCode)" mat-icon-button color="warn">
+            <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
+          </button>
+        </mat-cell>
+        </ng-container>
+    
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+      
+  <button mat-raised-button (click)="closeDialog()">Hủy</button>
+  <button mat-raised-button color="primary" (click)="closeDialog()">Lưu</button>
+</mat-dialog-actions>

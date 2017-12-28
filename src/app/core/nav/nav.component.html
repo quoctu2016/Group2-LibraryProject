@@ -1,0 +1,11 @@
+<mat-toolbar color="primary">
+  <span>Library</span>
+  
+  <span class="example-spacer"></span>
+  <button mat-button [matMenuTriggerFor]="appMenu"><mat-icon class="example-icon">menu</mat-icon></button>
+</mat-toolbar>
+
+<mat-menu #appMenu="matMenu">
+  <a mat-menu-item (click)="muonsachdialog()"><mat-icon class="example-icon">forward</mat-icon> Mượn sách</a>
+  <a mat-menu-item><mat-icon class="example-icon">reply</mat-icon>Trả sách</a>
+</mat-menu>

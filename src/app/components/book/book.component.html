@@ -1,0 +1,7 @@
+
+<h2>My Heroes</h2>
+<ul class="heroes">
+  <li [style.color]="(book==selectedBook)?'red':''" *ngFor="let book of books" routerLink="/detail/{{book.BookCode}}">
+    <span class="badge">{{book.BookCode}}</span> {{book.BookName}}
+  </li>
+</ul>
